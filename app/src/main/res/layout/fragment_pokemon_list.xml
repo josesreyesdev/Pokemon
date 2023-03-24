@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="sharedViewModel"
+            type="com.devjsr.pokemonapirest.ui.viewModel.PokemonViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.listPokemon.PokemonListFragment">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view_pokemon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.slidingpanelayout.widget.SlidingPaneLayout
+            android:id="@+id/sliding_pane_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_view_pokemon"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:padding="8dp"
+                android:layout_width="550dp"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:layout_gravity="start"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:src="@tools:sample/backgrounds/scenic"/>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/detail_container"
+                android:layout_width="300dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:name="com.devjsr.pokemonapirest.ui.detailsPokemon.PokemonDetailsFragment" />
+
+        </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.devjsr.pokemonapirest.modelApi.PokeResult" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="10dp"
+        app:strokeColor="@android:color/background_light">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/pokemon_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_android"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:srcCompat="@drawable/ic_android" />
+
+            <TextView
+                android:id="@+id/pokemon_name"
+                style="@style/PokemonApiRestTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:text="@{data.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/pokemon_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/title_placeholder" />
+
+            <TextView
+                android:id="@+id/newsTitle"
+                style="@style/PokemonApiRestDetailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:padding="8dp"
+                android:text="@{data.name}"
+                android:textColor="?android:textColorSecondary"
+                app:layout_constraintStart_toEndOf="@+id/pokemon_image"
+                app:layout_constraintTop_toBottomOf="@+id/pokemon_name"
+                tools:text="@string/news_title"/>
+
+            <TextView
+                android:id="@+id/sub_title"
+                style="@style/PokemonApiRestBody"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:text="@{data.url}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/pokemon_image"
+                app:layout_constraintTop_toBottomOf="@+id/newsTitle"
+                tools:text="@string/pokemon_info_placeholder"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
