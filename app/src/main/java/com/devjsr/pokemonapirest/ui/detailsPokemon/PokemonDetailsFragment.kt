@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.devjsr.pokemonapirest.R
+import coil.load
 import com.devjsr.pokemonapirest.databinding.FragmentPokemonDetailsBinding
 import com.devjsr.pokemonapirest.ui.viewModel.PokemonViewModel
 
@@ -31,11 +31,14 @@ class PokemonDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*sharedViewModel.currentPokemon.observe(this.viewLifecycleOwner) {
+        sharedViewModel.pokemon.observe(this.viewLifecycleOwner) { pokemon ->
             binding.apply {
-                textView.text = "Hola MUNDO MunDial"
+                nameDetail.text = pokemon.name
+                pokemonImageDetail.load(pokemon.sprites.front_default)
+                newsTitleDetail.text = pokemon.height.toString()
+                newsDetail.text = pokemon.weight.toString()
             }
-        } */
+        }
     }
 
     override fun onDestroyView() {

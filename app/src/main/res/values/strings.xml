@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Pokemon ApiRest</string>
+    <string name="app_name">Pokemon</string>
     <string name="title_placeholder">Pokemon name</string>
     <string name="pokemon_info_placeholder">Info del pokemon</string>
-    <string name="news_title">noticias del pokemon</string>
+    <string name="news_title">News del pokemon</string>
     <string name="id">ID: %s</string>
     <string name="pokemon_list">Pokemon List</string>
-    <string name="pokemon_details">Pokemon Details</string>
+    <string name="pokemon_details">Pokemon Detail</string>
 
 </resources>

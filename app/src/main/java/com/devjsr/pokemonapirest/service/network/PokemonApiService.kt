@@ -1,6 +1,6 @@
 package com.devjsr.pokemonapirest.service.network
 
-import com.devjsr.pokemonapirest.modelApi.PokeApiResponse
+import com.devjsr.pokemonapirest.modelApi.PokemonListResponse
 import com.devjsr.pokemonapirest.modelApi.Pokemon
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -24,17 +24,16 @@ private val retrofit= Retrofit.Builder()
     .build()
 
 interface PokemonApiService {
-
-    @GET("pokemon/{id}")
-    suspend fun getPokemonInfoById(@Path("id") id: Int) : Call<Pokemon>
-
     @GET("pokemon")
-    suspend fun getPokemonList( @Query("limit") limit: Int = 100000, @Query("offset") offset: Int = 0) : Response<PokeApiResponse>
+    suspend fun getPokemonList(
+        @Query("limit") limit: Int = 1281,
+        @Query("offset") offset: Int = 0
+    ) : Response<PokemonListResponse>
 
     @GET( "pokemon/{name}")
-    suspend fun getPokemonInfoByName(
+    suspend fun getPokemonByName(
         @Path("name") name: String
-    ) : Pokemon
+    ) : Call<Pokemon>
 }
 
 object PokemonApi {

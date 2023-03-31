@@ -1,32 +1,53 @@
 package com.devjsr.pokemonapirest.modelApi
 
-import com.squareup.moshi.Json
-
-//Lista de pokemones
-data class PokeApiResponse(
-    val count : Int,
-    val next: String,
-    val results: List<PokeResult>
+/* List Pokemons*/
+data class PokemonListResponse(
+    val count: Int,
+    val next: String?,
+    val previous: String?,
+    val results: List<PokemonListItem>
 )
 
-
-//Results of pokemones
-data class PokeResult(
+data class PokemonListItem(
     val name: String,
     val url: String
 )
 
-//Details of pokemon
+/* Pokemon */
 data class Pokemon(
     val id: Int,
-    val name : String,
-    val weight: Int,
+    val name: String,
     val height: Int,
-    val sprites: Sprites
+    val weight: Int,
+    val types: List<PokemonType>,
+    val abilities: List<PokemonAbility>,
+    val sprites: PokemonSprites
 )
 
-//images of pokemon
-data class Sprites (
-    @Json (name = "front_default") val frontDefault: String?,
-    @Json (name = "front_shiny") val frontShiny: String?
+data class PokemonType(
+    val slot: Int,
+    val type: PokemonTypeInfo
+)
+
+data class PokemonTypeInfo(
+    val name: String,
+    val url: String
+)
+
+data class PokemonAbility(
+    val ability: PokemonAbilityInfo,
+    val is_hidden: Boolean,
+    val slot: Int
+)
+
+data class PokemonAbilityInfo(
+    val name: String,
+    val url: String
+)
+
+data class PokemonSprites(
+    val front_default: String?,
+    val front_shiny: String?,
+    val back_default: String?,
+    val back_shiny: String?
 )

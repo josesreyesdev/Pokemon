@@ -6,18 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.devjsr.pokemonapirest.databinding.PokemonListItemBinding
-import com.devjsr.pokemonapirest.modelApi.PokeResult
+import com.devjsr.pokemonapirest.modelApi.PokemonListItem
 
-class PokemonListAdapter (private val onItemClicked: (PokeResult) -> Unit)
-    : ListAdapter<PokeResult, PokemonListAdapter.PokemonListViewHolder> (DiffCallback) {
-
-    //private lateinit var context: Context
+class PokemonListAdapter (private val onItemClicked: (PokemonListItem) -> Unit)
+    : ListAdapter<PokemonListItem, PokemonListAdapter.PokemonListViewHolder> (DiffCallback) {
 
     // Representan cada vista de mi lista
     class PokemonListViewHolder(private var binding: PokemonListItemBinding)
         : RecyclerView.ViewHolder(binding.root)  {
 
-        fun bind( pokemon: PokeResult) {
+        fun bind( pokemon: PokemonListItem) {
             binding.data = pokemon
             binding.executePendingBindings()
         }
@@ -38,15 +36,15 @@ class PokemonListAdapter (private val onItemClicked: (PokeResult) -> Unit)
     }
 
     //Objeto complementario para DiffCallback => para comparar dos objetos de tipo PokeResult
-    companion object DiffCallback : DiffUtil.ItemCallback<PokeResult>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<PokemonListItem>() {
 
         //Diffutil llama a este metodo para decidir si dos objetos representan el mismo valor
-        override fun areItemsTheSame(oldItem: PokeResult, newItem: PokeResult): Boolean {
+        override fun areItemsTheSame(oldItem: PokemonListItem, newItem: PokemonListItem): Boolean {
             return oldItem.name == newItem.name
         }
 
         //DiffUtil llama a este metodo cuando desea verificar si dos elementos tienen los mismos datos.
-        override fun areContentsTheSame(oldItem: PokeResult, newItem: PokeResult): Boolean {
+        override fun areContentsTheSame(oldItem: PokemonListItem, newItem: PokemonListItem): Boolean {
             return oldItem.url == newItem.url
         }
 

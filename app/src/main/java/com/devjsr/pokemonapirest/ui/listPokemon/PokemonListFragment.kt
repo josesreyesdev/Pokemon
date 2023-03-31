@@ -13,6 +13,7 @@ import com.devjsr.pokemonapirest.databinding.FragmentPokemonListBinding
 import com.devjsr.pokemonapirest.ui.listPokemon.adapterRecyclerView.PokemonListAdapter
 import com.devjsr.pokemonapirest.ui.viewModel.PokemonViewModel
 
+private const val TAG = "PokemonListFragment"
 class PokemonListFragment : Fragment() {
 
     private var _binding: FragmentPokemonListBinding? = null
@@ -26,20 +27,12 @@ class PokemonListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPokemonListBinding.inflate(inflater, container, false)
-
-        binding.apply {
-            lifecycleOwner = this@PokemonListFragment
-            sharedViewModel = sharedViewModel
-            recyclerView.adapter = PokemonListAdapter{}
-        }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("ListFragment", "Current Pokemon: ${sharedViewModel.currentPokemon.value}")
         adapterPokemon()
     }
 
@@ -59,8 +52,9 @@ class PokemonListFragment : Fragment() {
         }
 
         binding.recyclerView.adapter = adapter
+
         adapter.submitList(sharedViewModel.pokemonList.value)
-        Log.d("ListFragment", "List: ${sharedViewModel.pokemonList.value}")
+        Log.i(TAG, "Lista Pokemones2: ${sharedViewModel.pokemonList.value}")
     }
 
     override fun onDestroyView() {
@@ -69,8 +63,6 @@ class PokemonListFragment : Fragment() {
     }
 
 }
-
-
 
 class PokemonListOnBackPressedCallback(
     private val slidingPaneLayout: SlidingPaneLayout
