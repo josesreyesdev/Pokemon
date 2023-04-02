@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import coil.load
+import com.devjsr.pokemonapirest.R
 import com.devjsr.pokemonapirest.databinding.FragmentPokemonDetailsBinding
 import com.devjsr.pokemonapirest.ui.viewModel.PokemonViewModel
 
@@ -31,12 +32,12 @@ class PokemonDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.pokemon.observe(this.viewLifecycleOwner) { pokemon ->
+        sharedViewModel.pokemon.observe(this.viewLifecycleOwner) { pokemonSelected ->
             binding.apply {
-                nameDetail.text = pokemon.name
-                pokemonImageDetail.load(pokemon.sprites.front_default)
-                newsTitleDetail.text = pokemon.height.toString()
-                newsDetail.text = pokemon.weight.toString()
+                nameDetail.text = pokemonSelected.name
+                pokemonImageDetail.load(pokemonSelected.sprites.front_shiny)
+                newsTitleDetail.text = getString(R.string.height, pokemonSelected.height.toString())
+                newsDetail.text = getString(R.string.weight, pokemonSelected.weight.toString())
             }
         }
     }

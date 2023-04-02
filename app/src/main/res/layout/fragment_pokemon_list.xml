@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.slidingpanelayout.widget.SlidingPaneLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sliding_pane_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.listPokemon.PokemonListFragment">
 
-    <data>
-        <variable
-            name="sharedViewModel"
-            type="com.devjsr.pokemonapirest.ui.viewModel.PokemonViewModel" />
-    </data>
-
-    <androidx.slidingpanelayout.widget.SlidingPaneLayout
-        android:id="@+id/sliding_pane_layout"
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:padding="8dp"
+        android:layout_width="550dp"
         android:layout_height="match_parent"
-        tools:context=".ui.listPokemon.PokemonListFragment">
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_gravity="start"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:padding="8dp"
-            android:layout_width="550dp"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:layout_gravity="start"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/detail_container"
-            android:layout_width="300dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:name="com.devjsr.pokemonapirest.ui.detailsPokemon.PokemonDetailsFragment" />
-
-    </androidx.slidingpanelayout.widget.SlidingPaneLayout>
-
-</layout>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/detail_container"
+        android:layout_width="300dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:name="com.devjsr.pokemonapirest.ui.detailsPokemon.PokemonDetailsFragment" />
+</androidx.slidingpanelayout.widget.SlidingPaneLayout>

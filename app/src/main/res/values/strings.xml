@@ -4,6 +4,8 @@
     <string name="pokemon_info_placeholder">Info del pokemon</string>
     <string name="news_title">News del pokemon</string>
     <string name="id">ID: %s</string>
+    <string name="height">Height: %s</string>
+    <string name="weight">Weight: %s</string>
     <string name="pokemon_list">Pokemon List</string>
     <string name="pokemon_details">Pokemon Detail</string>
 

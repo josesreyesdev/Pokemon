@@ -27,16 +27,13 @@ class PokemonListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPokemonListBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapterPokemon()
-    }
-
-    private fun adapterPokemon() {
         val slidingPaneLayout = binding.slidingPaneLayout
         slidingPaneLayout.lockMode = SlidingPaneLayout.LOCK_MODE_LOCKED
         // Connect the SlidingPaneLayout to the system back button.

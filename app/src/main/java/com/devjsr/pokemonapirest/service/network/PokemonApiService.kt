@@ -4,7 +4,6 @@ import com.devjsr.pokemonapirest.modelApi.PokemonListResponse
 import com.devjsr.pokemonapirest.modelApi.Pokemon
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -33,7 +32,7 @@ interface PokemonApiService {
     @GET( "pokemon/{name}")
     suspend fun getPokemonByName(
         @Path("name") name: String
-    ) : Call<Pokemon>
+    ) : Response<Pokemon>
 }
 
 object PokemonApi {
