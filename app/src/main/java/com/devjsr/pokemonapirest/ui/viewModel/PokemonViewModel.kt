@@ -12,7 +12,8 @@ import com.devjsr.pokemonapirest.service.network.PokemonApi
 import kotlinx.coroutines.launch
 
 const val TAG = "PokeList"
-class PokemonViewModel: ViewModel() {
+
+class PokemonViewModel : ViewModel() {
 
     private val _pokemonList = MutableLiveData<List<PokemonListItem>>()
     val pokemonList: LiveData<List<PokemonListItem>> = _pokemonList
@@ -28,7 +29,7 @@ class PokemonViewModel: ViewModel() {
         _currentPokemon.value?.let { pokemon(it.name) }
     }
 
-    fun updateCurrentPokemon( pokemon: PokemonListItem) {
+    fun updateCurrentPokemon(pokemon: PokemonListItem) {
         _currentPokemon.value = pokemon
         _currentPokemon.value?.let { pokemon(it.name) }
     }
@@ -38,10 +39,8 @@ class PokemonViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 val response = PokemonApi.retrofitService.getPokemonList()
-                if (response.isSuccessful) {
-                    val pokeList = response.body()?.results ?: emptyList()
-                    _pokemonList.value = pokeList
-                }
+                val pokeList = response.body()?.results ?: emptyList()
+                _pokemonList.value = pokeList
 
             } catch (e: Exception) {
                 Log.d(TAG, "Error to load list pokemon ${e.message}")
@@ -56,7 +55,6 @@ class PokemonViewModel: ViewModel() {
             try {
                 val pokemonResponse = PokemonApi.retrofitService.getPokemonByName(pokeName)
                 _pokemon.value = pokemonResponse.body()
-                Log.d(TAG, "Pokemon: ${_pokemon.value}")
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.i(TAG, "Error load data of pokemon ${e.message}")
