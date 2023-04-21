@@ -58,19 +58,10 @@ class PokemonViewModel : ViewModel() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.i(TAG, "Error load data of pokemon ${e.message}")
-                _pokemon.value = Pokemon(
-                    0,
-                    "No Pokemon",
-                    0,
-                    0,
+                _pokemon.value = Pokemon(0, "Error load Pokemon", 0, 0,
                     listOf(),
                     listOf(),
-                    PokemonSprites(
-                        "No link",
-                        "No link",
-                        "No link",
-                        "No link"
-                    )
+                    PokemonSprites(null, null, null, null)
                 )
             }
         }
