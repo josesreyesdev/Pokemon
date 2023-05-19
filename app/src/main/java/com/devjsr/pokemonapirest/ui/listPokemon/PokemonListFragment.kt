@@ -50,8 +50,13 @@ class PokemonListFragment : Fragment() {
 
         binding.recyclerView.adapter = adapter
 
-        adapter.submitList(sharedViewModel.pokemonList.value)
-        Log.i(TAG, "Lista Pokemones2: ${sharedViewModel.pokemonList.value}")
+        sharedViewModel.pokemonList.observe(this.viewLifecycleOwner) { pokemonList ->
+            pokemonList.let { 
+                adapter.submitList(pokemonList)
+                Log.i(TAG, "Lista Pokemones2: $pokemonList")
+            }
+        }
+
     }
 
     override fun onDestroyView() {

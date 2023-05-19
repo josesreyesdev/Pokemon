@@ -9,7 +9,6 @@ import com.devjsr.pokemonapirest.modelApi.Pokemon
 import com.devjsr.pokemonapirest.modelApi.PokemonListItem
 import com.devjsr.pokemonapirest.modelApi.PokemonSprites
 import com.devjsr.pokemonapirest.service.network.PokemonApi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 const val TAG = "PokeList"
@@ -36,11 +35,12 @@ class PokemonViewModel : ViewModel() {
     }
 
     private fun getPokemonList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch/*(Dispatchers.IO)*/ {
             try {
                 val response = PokemonApi.retrofitService.getPokemonList()
-                val pokeList = response.body()?.results ?: emptyList()
-                _pokemonList.postValue(pokeList)
+                val pokeList = response.body()?.results //?: emptyList()
+                _pokemonList.postValue(pokeList!!)
+                Log.d(TAG, "Lista Poke: $pokeList")
 
             } catch (e: Exception) {
                 Log.d(TAG, "Error to load list pokemon ${e.message}")
