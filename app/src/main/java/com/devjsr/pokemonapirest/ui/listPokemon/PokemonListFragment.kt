@@ -1,7 +1,6 @@
 package com.devjsr.pokemonapirest.ui.listPokemon
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.devjsr.pokemonapirest.databinding.FragmentPokemonListBinding
 import com.devjsr.pokemonapirest.ui.listPokemon.adapterRecyclerView.PokemonListAdapter
 import com.devjsr.pokemonapirest.ui.viewModel.PokemonViewModel
 
-private const val TAG = "PokemonListFragment"
 class PokemonListFragment : Fragment() {
 
     private var _binding: FragmentPokemonListBinding? = null
@@ -53,7 +51,6 @@ class PokemonListFragment : Fragment() {
         sharedViewModel.pokemonList.observe(this.viewLifecycleOwner) { pokemonList ->
             pokemonList.let { 
                 adapter.submitList(pokemonList)
-                Log.i(TAG, "Lista Pokemones2: $pokemonList")
             }
         }
 
