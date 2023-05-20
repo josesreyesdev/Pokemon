@@ -9,6 +9,7 @@ import com.devjsr.pokemonapirest.modelApi.Pokemon
 import com.devjsr.pokemonapirest.modelApi.PokemonListItem
 import com.devjsr.pokemonapirest.modelApi.PokemonSprites
 import com.devjsr.pokemonapirest.service.network.PokemonApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 const val TAG = "PokeList"
@@ -18,50 +19,50 @@ class PokemonViewModel : ViewModel() {
     private val _pokemonList = MutableLiveData<List<PokemonListItem>>()
     val pokemonList: LiveData<List<PokemonListItem>> = _pokemonList
 
-    private val _currentPokemon = MutableLiveData<PokemonListItem>()
+    private val currentPokemon = MutableLiveData<PokemonListItem>()
 
     private val _pokemon = MutableLiveData<Pokemon>()
     val pokemon: LiveData<Pokemon> = _pokemon
 
     init {
         getPokemonList()
-        _currentPokemon.value = _pokemonList.value?.get(0)
-        _currentPokemon.value?.let { pokemon(it.name) }
-    }
-
-    fun updateCurrentPokemon(pokemon: PokemonListItem) {
-        _currentPokemon.value = pokemon
-        _currentPokemon.value?.let { pokemon(it.name) }
     }
 
     private fun getPokemonList() {
-        viewModelScope.launch/*(Dispatchers.IO)*/ {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = PokemonApi.retrofitService.getPokemonList()
-                val pokeList = response.body()?.results //?: emptyList()
-                _pokemonList.postValue(pokeList!!)
-                Log.d(TAG, "Lista Poke: $pokeList")
+                val pokeList = response.body()?.results ?: emptyList()
+                _pokemonList.postValue(pokeList)
+                currentPokemon.postValue(pokeList[0])
+                currentPokemon.value?.let { pokemon(it.name) }
 
             } catch (e: Exception) {
-                Log.d(TAG, "Error to load list pokemon ${e.message}")
-                _pokemonList.value = listOf()
+                _pokemonList.value = emptyList()
             }
         }
     }
 
-    private fun pokemon(pokeName: String) {
+    fun updateCurrentPokemon(pokemon: PokemonListItem) {
+        currentPokemon.value = pokemon
+        currentPokemon.value?.let { pokemon(it.name) }
+    }
 
-        viewModelScope.launch {
+    private fun pokemon(pokemonName: String) {
+
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val pokemonResponse = PokemonApi.retrofitService.getPokemonByName(pokeName)
-                _pokemon.value = pokemonResponse.body()
+                val pokemonResponse = PokemonApi.retrofitService.getPokemonByName(pokemonName)
+                _pokemon.postValue(pokemonResponse.body())
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.i(TAG, "Error load data of pokemon ${e.message}")
-                _pokemon.value = Pokemon(0, "Error load Pokemon", 0, 0,
-                    listOf(),
-                    listOf(),
-                    PokemonSprites(null, null, null, null)
+                _pokemon.postValue(
+                    Pokemon(0, "Error load Pokemon", 0, 0,
+                        listOf(),
+                        listOf(),
+                        PokemonSprites(null, null, null, null)
+                    )
                 )
             }
         }
