@@ -35,7 +35,7 @@ class PokemonDetailsFragment : Fragment() {
         sharedViewModel.pokemon.observe(this.viewLifecycleOwner) { pokemonSelected ->
             binding.apply {
                 nameDetail.text = pokemonSelected.name
-                pokemonImageDetail.load(pokemonSelected.sprites.front_shiny)
+                pokemonImageDetail.load(pokemonSelected.sprites.other.officialArtwork.frontDefault)
                 newsTitleDetail.text = getString(R.string.height, pokemonSelected.height.toString())
                 newsDetail.text = getString(R.string.weight, pokemonSelected.weight.toString())
             }

@@ -1,5 +1,7 @@
 package com.devjsr.pokemonapirest.modelApi
 
+import com.squareup.moshi.Json
+
 /* List Pokemons*/
 data class PokemonListResponse(
     val count: Int,
@@ -36,7 +38,7 @@ data class PokemonTypeInfo(
 
 data class PokemonAbility(
     val ability: PokemonAbilityInfo,
-    val is_hidden: Boolean,
+    @Json(name = "is_hidden") val isHidden: Boolean,
     val slot: Int
 )
 
@@ -46,8 +48,23 @@ data class PokemonAbilityInfo(
 )
 
 data class PokemonSprites(
-    val front_default: String?,
-    val front_shiny: String?,
-    val back_default: String?,
-    val back_shiny: String?
+    @Json(name = "front_default") val frontDefault: String?,
+    @Json(name = "front_shiny") val frontShiny: String?,
+    @Json(name = "back_default") val backDefault: String?,
+    @Json(name = "back_shiny") val backShiny: String?,
+    val other: PokemonOther
+)
+
+data class PokemonOther(
+    @Json(name = "dream_world") val dreamWorld: PokemonDreamWorld,
+    @Json(name = "official-artwork") val officialArtwork: PokemonOfficialArtwork
+)
+
+data class PokemonDreamWorld(
+    @Json(name = "front_default") val frontDefault: String?
+)
+
+data class PokemonOfficialArtwork(
+    @Json(name = "front_default") val frontDefault: String?,
+    @Json(name = "front_shiny") val frontShiny: String?
 )

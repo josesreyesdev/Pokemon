@@ -23,9 +23,11 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@null"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -37,6 +39,7 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
                 app:layout_constraintBottom_toBottomOf="@+id/pokemonImageDetail"
                 app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="TextContrastCheck"
                 tools:text="@string/title_placeholder" />
 
             <TextView

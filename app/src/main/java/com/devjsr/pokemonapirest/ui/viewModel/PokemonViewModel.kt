@@ -6,7 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devjsr.pokemonapirest.modelApi.Pokemon
+import com.devjsr.pokemonapirest.modelApi.PokemonDreamWorld
 import com.devjsr.pokemonapirest.modelApi.PokemonListItem
+import com.devjsr.pokemonapirest.modelApi.PokemonOfficialArtwork
+import com.devjsr.pokemonapirest.modelApi.PokemonOther
 import com.devjsr.pokemonapirest.modelApi.PokemonSprites
 import com.devjsr.pokemonapirest.service.network.PokemonApi
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +39,6 @@ class PokemonViewModel : ViewModel() {
                 _pokemonList.postValue(pokeList)
                 currentPokemon.postValue(pokeList[0])
                 currentPokemon.value?.let { pokemon(it.name) }
-
             } catch (e: Exception) {
                 _pokemonList.value = emptyList()
             }
@@ -61,7 +63,16 @@ class PokemonViewModel : ViewModel() {
                     Pokemon(0, "Error load Pokemon", 0, 0,
                         listOf(),
                         listOf(),
-                        PokemonSprites(null, null, null, null)
+                        PokemonSprites(
+                            null,
+                            null,
+                            null,
+                            null,
+                            PokemonOther(
+                                PokemonDreamWorld(null),
+                                PokemonOfficialArtwork(null, null)
+                            )
+                        )
                     )
                 )
             }
