@@ -34,7 +34,7 @@ class PokemonViewModel : ViewModel() {
     private fun getPokemonList() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = PokemonApi.retrofitService.getPokemonList()
+                val response = PokemonApi.retrofitService.getPokemonList(50)
                 val pokeList = response.body()?.results ?: emptyList()
                 _pokemonList.postValue(pokeList)
                 currentPokemon.postValue(pokeList[0])
