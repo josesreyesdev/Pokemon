@@ -23,5 +23,6 @@
         android:layout_width="300dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:name="com.devjsr.pokemonapirest.ui.detailsPokemon.PokemonDetailsFragment" />
+        android:name="com.devjsr.pokemonapirest.ui.detailsPokemon.PokemonDetailsFragment"
+        tools:layout="@layout/activity_main"/>
 </androidx.slidingpanelayout.widget.SlidingPaneLayout>
